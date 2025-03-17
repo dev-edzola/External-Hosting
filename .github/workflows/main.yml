@@ -1,0 +1,22 @@
+name: Sync Main to gh-pages
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow when changes are pushed to "main"
+
+jobs:
+  sync-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push changes to gh-pages
+        run: |
+          git checkout gh-pages
+          git merge --ff-only main
+          git push origin gh-pages
