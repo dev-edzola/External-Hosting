@@ -1,22 +1,26 @@
-name: Sync Main to gh-pages
+name: Deploy to GitHub Pages from main
 
 on:
   push:
     branches:
-      - main  # Trigger the workflow when changes are pushed to "main"
+      - main
 
 jobs:
-  sync-branch:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout main branch
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Push changes to gh-pages
-        run: |
-          git checkout gh-pages
-          git merge --ff-only main
-          git push origin gh-pages
+      - name: Install dependencies
+        run: npm install  # Change for Vue/Angular
+
+      - name: Build the project
+        run: npm run build  # Change for Vue/Angular
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: main
+          folder: build  # Use "dist" for Vue/Angular
