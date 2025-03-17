@@ -579,7 +579,7 @@ function OrderTrackingApp() {
                       onClick={() => deleteRecord(item.ID)}
                       disabled={deletingId === item.ID}
                     >
-                      {deletingId === item.ID ? 'Deleting...' : <FaTrash />}
+                      {deletingId === item.ID ? 'Deleting...' : 'Delete'}
                     </button>
                   </td>
                 </tr>
